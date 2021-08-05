@@ -1,0 +1,22 @@
+{
+  "name": "readit",
+  "version": "1.0.0",
+  "description": "A clone of the popular social media site Reddit. It's written in Javascript and uses Node.JS, Express, and MongoDB/Mongoose. This was my first project to use Mongoose and Express.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marco-dm1/Readit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marco-dm1/Readit/issues"
+  },
+  "homepage": "https://github.com/marco-dm1/Readit#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
