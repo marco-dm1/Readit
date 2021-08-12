@@ -11,8 +11,14 @@
                 place-items: center;
             }
 
-            #contentCard{
+            #profileContainer{
                 width: 70%;
+
+            }
+            #profileContainerContent{
+                display: grid;
+                grid-template-columns: 30% auto;
+                grid-gap: 0.25rem;
             }
 
             #profileCardHeader{
@@ -29,51 +35,63 @@
 
             #profileStats{
                 margin: 0.25rem 0 0 0.25rem;
-                width: 30%;
-                
             }
             #profileStats li{
                 height: 2rem;
                 white-space: nowrap;
                 font-size: 2vmin;
             }
+            #profileActivity{
+                float: right; 
+            }
 
+            .profileActivityCard{
+                margin: 0.25rem 0.25rem 0.25rem 0;
+            }
+
+            #contentCard a{
+                text-decoration: none;
+                color: black;
+            }
+
+            footer i{
+                font-weight: 100;
+            }
         </style>
     </head>
     <body>
         <h1>Readit</h1>
-        <div id="contentCard" class="card mb-4 rounded-3 shadow-sm">
+        <div id="profileContainer" class="card mb-4 rounded-3 shadow-sm">
             <div id="profileCardHeader" class="card-header">
-                    <img class="card-img-top profilePicture" src="https://via.placeholder.com/150" alt="Card image cap">
-                    <h4 class="profileName" style="font-size: 2.5rem; font-weight: 400;">Marco</h4>
+                <img class="card-img-top profilePicture" src="https://via.placeholder.com/150" alt="Card image cap">
+                <h4 class="profileName" style="font-size: 2.5rem; font-weight: 400;">Marco</h4>
             </div>
-            <ul id="profileStats" class="list-group">
-                <li class="list-group-item">Joined: 01/01/2020</li>
-                <li class="list-group-item">Lives in: USA</li>
-                <li class="list-group-item">Readit Posts: 952</li>
-                <li class="list-group-item">Readit Comments: 642</li>
-                <li class="list-group-item">Readit Likes: 452</li>
-            </ul>
-            <div id="contentCard" class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h4 class="my-0 fw-normal">Pro</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>
+            <div id="profileContainerContent">
+                <ul id="profileStats" class="list-group">
+                    <li id="joinStat" class="list-group-item">Joined: 01/01/2020</li>
+                    <li id="liveStat" class="list-group-item">Lives in: USA</li>
+                    <li id="postStat" class="list-group-item">Posts: 952</li>
+                    <li id="commentStat" class="list-group-item">Comments: 642</li>
+                    <li id="likeStat" class="list-group-item">Likes: 452</li>
+                </ul>
+                <div id="profileActivity">
+                    <!-- POST TEMPLATE
+                    <div id="contentCard" class="profileActivityCard card rounded-3 shadow-sm">
+                        <a href="#">
+                            <div class="card-header py-1">
+                                <h5 class="my-0 fw-normal"> TITLE TEXT HERE </h5>
+                            </div>
+                            <div class="card-body">
+                                <i> BODY TEXT HERE </i>
+                            </div>
+                        </a>
+                    </div>
+                    -->
                 </div>
             </div>
-        </div>
-        <div id="loginForm" style="padding: 1rem;">
-            <div id="inputDiv">
-                <div class="input-group mb-2">
-                    <span id="handleHashtag" class="input-group-text">@</span>
-                    <input id="handleInput" type="text" class="form-control" placeholder="Readit Handle" aria-describedby="handleHashtag">
-                </div>
-                <input id="passwordInput" type="password" class="form-control mb-2" placeholder="Password">
-            </div>
-            <button class="btn btn-primary mt-2" style="float: right; width: 40%;">Login</button>
-            <a href="./register"><button class="btn btn-secondary mt-2" style="float: left; width: 55%; white-space: nowrap;">Register Instead</button></a>
-            <small class="form-text text-muted" style="width: 20%;">Account passwords are stored securely while inside our internal systems.</small>
         </div>
     </body>
+    <footer>
+        <i>Readit - <a href="https://github.com/marco-dm1">marco-dm1</a> 2021</i>
+    </footer>
 </html>
