@@ -17,6 +17,18 @@ app.get("/", function(request, response){
     console.log("index sent");
 })
 
+app.get("/discover", function(request, response){
+    response.sendFile(
+        "views/discover.html", // Get the discover html page from the views folder
+        {"root": "./"}, // Search for the file inside of the view folder from the current location
+        function(err){
+            if(err){
+                console.log("Error occured: ", err);
+                response.send("Error occurred when trying to retrieve view from server")
+            }
+        });
+})
+
 app.get("/createsub", function(request, response){
     response.sendFile(
         "views/createSub.html", // Get the sub creation html page from the views folder
