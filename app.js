@@ -1,9 +1,9 @@
 const express = require("express");
 let app = express();
 const accountsRouting = require("./routes/accounts.js");
-const subReaditRouting = require("./routes/subreadits");
+const subReaditRouting = require("./routes/subreadits.js");
+const apiRouting = require("./routes/api.js");
 
-const fs = require("fs");
 app.get("/", function(request, response){
     response.sendFile(
         "views/index.html", // Get the index html page from the views folder
@@ -43,6 +43,7 @@ app.get("/createsub", function(request, response){
 
 app.use("/accounts", accountsRouting);
 app.use("/r", subReaditRouting)
+app.use("/api", apiRouting);
 
 app.listen(3000);
 console.log("Express server listening on localhost:3000");
