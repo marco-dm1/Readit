@@ -1,11 +1,8 @@
-// Handles express routing for account login, creation, and the settings
-
 const router = require("express").Router();
-const userRouting = require("./users.js");
 
-router.get("/login", function(req, res){
+router.get("/me", function(req, res){
     res.sendFile(
-        "login.html", // Get the login html page from the accounts folder
+        "profile.html",
         {"root": "./views/accounts/"},
         function(err){
             if(err){
@@ -15,9 +12,10 @@ router.get("/login", function(req, res){
         });
 })
 
-router.get("/register", function(req, res){
+router.get("/:userId", function(req, res){
+    console.log("profile with userid loaded: ", req.params);
     res.sendFile(
-        "register.html", // Get the register html page from the accounts folder
+        "profile.html",
         {"root": "./views/accounts/"},
         function(err){
             if(err){
@@ -27,8 +25,4 @@ router.get("/register", function(req, res){
         });
 })
 
-router.use("/user", userRouting);
-
-
-// Export router for use in the primary routing js file
 module.exports = router;
