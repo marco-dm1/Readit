@@ -4,16 +4,25 @@ const router = require("express").Router();
 const accRouting = require("./endpoints/acc.js");
 const subRouting = require("./endpoints/sub.js");
 
+/*
+
+/api/getDiscover
+
+*/
+
 router.get("/getdiscover", function(req, res){
-    res.sendFile(
-        "subReadit.html",
-        {"root": "./views/subreadits/"},
-        function(err){
-            if(err){
-                console.log("Error occured: ", err);
-                res.send("Error occurred when trying to retrieve view from server")
-            }
-        });
+    res.set("Content-Type", "application/json");
+    res.send(JSON.stringify({success: false, data: {}}));
+
+    /*
+    Discover Schema
+
+    - popularSubs - type: Array
+    - latestPosts - type: Array
+    - newestUser - type: String
+    - 
+
+    */
 })
 
 router.use("/acc", accRouting);
