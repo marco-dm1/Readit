@@ -3,6 +3,7 @@
 const router = require("express").Router();
 const accRouting = require("./endpoints/acc.js");
 const subRouting = require("./endpoints/sub.js");
+const database = require("../database/functions.js")
 
 /*
 
@@ -12,17 +13,8 @@ const subRouting = require("./endpoints/sub.js");
 
 router.get("/getdiscover", function(req, res){
     res.set("Content-Type", "application/json");
-    res.send(JSON.stringify({success: false, data: {}}));
-
-    /*
-    Discover Schema
-
-    - popularSubs - type: Array
-    - latestPosts - type: Array
-    - newestUser - type: String
-    - 
-
-    */
+    let discoverData = database.getDiscoverData();
+    res.send(JSON.stringify({success: true, data: JSON.stringify(discoverData)}));
 })
 
 router.use("/acc", accRouting);
