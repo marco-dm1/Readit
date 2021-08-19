@@ -3,6 +3,7 @@ let app = express();
 const accountsRouting = require("./routes/accounts.js");
 const subReaditRouting = require("./routes/subreadits.js");
 const apiRouting = require("./routes/api.js");
+const jsRouting = require("./routes/javascript.js");
 
 app.get("/", function(request, response){
     response.sendFile(
@@ -44,6 +45,7 @@ app.get("/createsub", function(request, response){
 app.use("/accounts", accountsRouting);
 app.use("/r", subReaditRouting)
 app.use("/api", apiRouting);
+app.use("/js", jsRouting);
 
 app.listen(3000);
 console.log("Express server listening on localhost:3000");
