@@ -10,6 +10,6 @@ async function getData(){
 
 getData().then(function(data){
         console.log("fetch properly got data: ", JSON.stringify(data));
-    }.catch(function(err){
+    }).catch(function(err){
         console.log("Fetch didnt get data: ", err);
-    }))
+    })
