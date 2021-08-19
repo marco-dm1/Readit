@@ -14,7 +14,7 @@ const database = require("../database/functions.js")
 router.get("/getdiscover", function(req, res){
     res.set("Content-Type", "application/json");
     let discoverData = database.getDiscoverData();
-    res.send(JSON.stringify({success: true, data: JSON.stringify(discoverData)}));
+    res.send(JSON.stringify({success: true, data: JSON.stringify(discoverData)}));2
 })
 
 router.use("/acc", accRouting);

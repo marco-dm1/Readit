@@ -27,11 +27,6 @@
                 margin: 0.25rem 0.25rem 0.25rem 0.25rem;
             }
 
-            #contentCard a{
-                text-decoration: none;
-                color: black;
-            }
-
             footer i{
                 font-weight: 100;
             }
@@ -54,6 +49,10 @@
                 text-decoration: none;
                 color: black;
             }
+
+            #contentCard{
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -64,33 +63,30 @@
         </div>
         <div id="contentContainer" class="card mb-4 rounded-3 shadow-sm">
             <div id="contentCardHeader" class="card-header">
-                <h4 class="profileName" style="font-size: 2.5rem; font-weight: 400;">Popular subReadits</h4>
+                <h4 style="font-size: 2.5rem; font-weight: 400;">Popular subReadits</h4>
             </div>
             <div id="popularSubReadits">
-                <a href="#"><li>One</li></a>
-                <a href="#"><li>Two</li></a>
-                <a href="#"><li>Three</li></a>
-                <a href="#"><li>Four</li></a>
-                <a href="#"><li>Five</li></a>
-                <a href="#"><li>Six</li></a>
+                <li id="popularSubOne">One</li>
+                <li id="popularSubTwo">Two</li>
+                <li id="popularSubThree">Three</li>
+                <li id="popularSubFour">Four</li>
+                <li id="popularSubFive">Five</li>
+                <li id="popularSubSix">Six</li>
             </div>
             <div id="contentCardHeader" class="card-header" style="border-top: 1px rgba(0,0,0,.125);">
-                <h4 class="profileName" style="font-size: 2.5rem; font-weight: 400;">Recent Posts</h4>
+                <h4 style="font-size: 2.5rem; font-weight: 400;">Latest Post</h4>
             </div>
-            <!--
-                Recent Post Template
-
                 <div id="contentCard" class="postCard card rounded-3 shadow-sm">
-                    <a href="#">
-                        <div class="card-header py-1">
-                            <h5 class="my-0 fw-normal"> TITLE TEXT HERE </h5>
-                        </div>
-                        <div class="card-body">
-                            <i> BODY TEXT HERE </i>
-                        </div>
-                    </a>
+                    <div class="card-header py-1">
+                        <h5 id="contentCardTitle" class="my-0 fw-normal"></h5>
+                    </div>
+                    <div class="card-body">
+                        <i id="contentCardBody"></i>
+                    </div>
                 </div>
-            -->
+            <div id="contentCardHeader" class="card-header" style="height: 3rem;">
+                <h4 id="newestUserHeader" style="font-size: 1.5rem; font-weight: 300;">Newest User: </h4>
+            </div>
         </div>
         <script src="./js/discoverPage.js"></script>
     </body>

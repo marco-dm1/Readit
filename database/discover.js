@@ -46,6 +46,7 @@ function init(){
         name: "testaccount",
         subReadit: "test",
         postId: 1,
+        title: "test title",
         desc: "test description",
     },
     newestUser: {
