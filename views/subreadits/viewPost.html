@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/0d8501ee06.js" crossorigin="anonymous"></script>
         <style>
             body{
                 display: grid;
@@ -56,13 +56,24 @@
                 text-decoration: none;
                 color: black;
             }
+
+            .comment-title{
+                font-size: 13px;
+            }
+
+            .like-button{
+                background-color: transparent;
+                background-repeat:no-repeat;
+                border: none;
+                padding: 0;
+            }
         </style>
     </head>
     <body>
         <a id="readitTitle" href="./"><h1>Readit</h1></a>
         <div id="discoverButtons">
-            <a href="./createsub"><button class="btn btn-primary">Create Post</button></a>
-            <a href="./accounts/user/me"><button class="btn btn-primary">View My Profile</button></a>
+            <a href="../createsub"><button class="btn btn-primary">Create Post</button></a>
+            <a href="../accounts/user/me"><button class="btn btn-primary">View My Profile</button></a>
         </div>
         <div id="contentContainer" class="card mb-4 rounded-3 shadow-sm">
             <div id="postContainer">
@@ -72,32 +83,37 @@
 
                 <div id="contentCard" class="postCard card rounded-3 shadow-sm">
                     <div class="card-header py-1">
-                        <h4 id="contentCardTitle" class="my-0 fw-normal">test title</h4>
+                        <h4 id="postTitle" class="my-0 fw-normal">test title</h4>
+                        <div class="comment-title">
+                            <i id="postCreator">testaccount - 0 Likes</i>
+                            <button class="far fa-arrow-alt-circle-up like-button"></button>
+                            <button class="far fa-arrow-alt-circle-down like-button"></button>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <i id="contentCardBody">test body</i>
+                        <i id="postDescription">test body</i>
                     </div>
                 </div>
                 <div id="commentCard">
                     <div id="contentCard" class="postCard card rounded-3 shadow-sm">
                         <div class="card-header py-1">
-                            <h5 id="contentCardTitle" class="my-0 fw-normal">Comments</h5>
+                            <h5 class="my-0 fw-normal">Comments</h5>
                         </div>
                         <div class="card-body">
-                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
-                                <div class="card-body">
-                                    <i>test body</i>
+                            <div id="commentSection">
+                                <!--
+                                    Comment Template
+                                <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="comment-title">
+                                            <i>testaccount - 0 Likes</i>
+                                            <button class="far fa-arrow-alt-circle-up like-button"></button>
+                                            <button class="far fa-arrow-alt-circle-down like-button"></button>
+                                        </div>
+                                        test body
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
-                                <div class="card-body">
-                                    <i>test body</i>
-                                </div>
-                            </div>
-                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
-                                <div class="card-body">
-                                    <i>test body</i>
-                                </div>
+                                -->
                             </div>
                             <div id="contentCard" class="postCard card rounded-3 shadow-sm">
                                 <div class="card-body">
