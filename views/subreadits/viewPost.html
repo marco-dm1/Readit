@@ -1,4 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    viewPost
+    <head>
+        <title>View Post - Readit</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <style>
+            body{
+                display: grid;
+                place-items: center;
+            }
+
+            #contentContainer{
+                width: 70%;
+                display: grid;
+                grid-template-columns: 70% 30%;
+                column-gap: 0.1rem;
+            }
+
+            .postCard{
+                margin: 0.25rem 0.25rem 0.25rem 0.25rem;
+            }
+
+            footer i{
+                font-weight: 100;
+            }
+
+            #discoverButtons{
+                margin-bottom: 0.75rem;
+            }
+
+            #readitTitle{
+                text-decoration: none;
+                color: black;
+            }
+
+            .card-header-border{
+                border-left: 1px solid rgba(0,0,0,.125);
+                border-right: 1px solid rgba(0,0,0,.125);
+            }
+
+            #infoContainerHeader{
+                border-right: 0;
+                height: 100%;
+                display: grid;
+                justify-items: center;
+                text-align: center;
+            }
+
+            #titleLink{
+                text-decoration: none;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <a id="readitTitle" href="./"><h1>Readit</h1></a>
+        <div id="discoverButtons">
+            <a href="./createsub"><button class="btn btn-primary">Create Post</button></a>
+            <a href="./accounts/user/me"><button class="btn btn-primary">View My Profile</button></a>
+        </div>
+        <div id="contentContainer" class="card mb-4 rounded-3 shadow-sm">
+            <div id="postContainer">
+                <div class="card-header card-header-border" style="border-left: 0;">
+                    <a id="titleLink" href="./"><h4 style="font-size: 2.5rem; font-weight: 400;">r/Cars</h4></a>
+                </div>
+
+                <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                    <div class="card-header py-1">
+                        <h4 id="contentCardTitle" class="my-0 fw-normal">test title</h4>
+                    </div>
+                    <div class="card-body">
+                        <i id="contentCardBody">test body</i>
+                    </div>
+                </div>
+                <div id="commentCard">
+                    <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                        <div class="card-header py-1">
+                            <h5 id="contentCardTitle" class="my-0 fw-normal">Comments</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                                <div class="card-body">
+                                    <i>test body</i>
+                                </div>
+                            </div>
+                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                                <div class="card-body">
+                                    <i>test body</i>
+                                </div>
+                            </div>
+                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                                <div class="card-body">
+                                    <i>test body</i>
+                                </div>
+                            </div>
+                            <div id="contentCard" class="postCard card rounded-3 shadow-sm">
+                                <div class="card-body">
+                                    <div id="inputDiv">
+                                        <div class="form-group">
+                                            <textarea id="postCommentInput" class="form-control" rows="3" placeholder="Your Comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary mt-2" style="float: right;">Create Comment</button>
+                                    <small class="form-text text-muted" style="width: 20%;">All comments will be attached to your account.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="infoContainer">
+                <div id="infoContainerHeader" class="card-header card-header-border">
+                    <div>
+                        <i>SubReadit created by testaccount</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../js/subreaditpage.js"></script>
+    </body>
+    <footer>
+        <i>Readit - <a href="https://github.com/marco-dm1">marco-dm1</a> 2021</i>
+    </footer>
 </html>
