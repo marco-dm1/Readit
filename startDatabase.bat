@@ -1,1 +1,1 @@
-mongod --dbpath "./siteData"
+mongod --dbpath "./websiteData"
