@@ -98,19 +98,7 @@
                         </div>
                         <div class="card-body">
                             <div id="commentSection">
-                                <!--
-                                    Comment Template
-                                <div id="contentCard" class="postCard card rounded-3 shadow-sm">
-                                    <div class="card-body">
-                                        <div class="comment-title">
-                                            <i>testaccount - 0 Likes</i>
-                                            <button class="far fa-arrow-alt-circle-up like-button"></button>
-                                            <button class="far fa-arrow-alt-circle-down like-button"></button>
-                                        </div>
-                                        test body
-                                    </div>
-                                </div>
-                                -->
+                                <!-- Comments go here -->
                             </div>
                             <div id="contentCard" class="postCard card rounded-3 shadow-sm">
                                 <div class="card-body">
@@ -119,7 +107,7 @@
                                             <textarea id="postCommentInput" class="form-control" rows="3" placeholder="Your Comment"></textarea>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary mt-2" style="float: right;">Create Comment</button>
+                                    <button onclick="postComment(document.getElementById('postCommentInput'))" class="btn btn-primary mt-2" style="float: right;">Create Comment</button>
                                     <small class="form-text text-muted" style="width: 20%;">All comments will be attached to your account.</small>
                                 </div>
                             </div>
