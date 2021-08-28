@@ -6,16 +6,18 @@ function redirectURLs(){
     let redirects = ["accounts/login", "accounts/register"]
     for(let i = 0; i < redirects.length; i++){
         if(document.URL.search(redirects[i]) != -1){
-            // Check if logged in and redirect
-            if(sessionToken.search("DO-NOT-SHARE-")){
+            if(sessionToken.search("DO-NOT-SHARE-SECURE") != -1){
+                console.log("redirecting");
                 window.location.replace("../");
+                // document.cookie = "DO-NOT-SHARE-SECURE=test; expires=Thu, 18 Dec 2013 12:00:00 UTC"
             }
         }
     }
 }
 
 function init(){
-    redirectURLs();
+    console.log("Loaded Readit client-side authentication script");
+    redirectURLs(); // Redirect us if we are in a logged out area of the website
 }
 
 init();
