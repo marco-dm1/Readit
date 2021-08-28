@@ -3,12 +3,24 @@
 let sessionToken = document.cookie
 
 function redirectURLs(){
-    let redirects = ["accounts/login", "accounts/register"]
+    let redirects = [["accounts/login", 1], ["accounts/register", 1]]
     for(let i = 0; i < redirects.length; i++){
-        if(document.URL.search(redirects[i]) != -1){
+        if(document.URL.search(redirects[i][0]) != -1){
             if(sessionToken.search("DO-NOT-SHARE-SECURE") != -1){
                 console.log("redirecting");
-                window.location.replace("../");
+                let path;
+                switch(redirects[i][1]){
+                    case 3:
+                        path = "../../../";
+                        break;
+                    case 2:
+                        path = "../../";
+                        break;
+                    default:
+                        path = "../";
+                        break;
+                }
+                window.location.replace(path);
                 // document.cookie = "DO-NOT-SHARE-SECURE=test; expires=Thu, 18 Dec 2013 12:00:00 UTC"
             }
         }
