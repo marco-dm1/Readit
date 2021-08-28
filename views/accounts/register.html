@@ -24,10 +24,11 @@
                 <input id="passwordInput" type="password" class="form-control mb-2" placeholder="Password">
                 <input id="confirmPasswordInput" type="password" class="form-control mb-2" placeholder="Confirm Password">
             </div>
-            <button class="btn btn-primary mt-2" style="float: right; width: 40%;">Register</button>
+            <button onclick="register(document.getElementById('handleInput').value, document.getElementById('passwordInput').value, document.getElementById('confirmPasswordInput').value)" class="btn btn-primary mt-2" style="float: right; width: 40%;">Register</button>
             <a href="./login"><button class="btn btn-secondary mt-2" style="float: left; width: 55%; white-space: nowrap;">Login Instead</button></a>
             <small class="form-text text-muted" style="width: 20%;">Account passwords are stored securely while inside our internal systems.</small>
         </div>
         <script src="../js/authentication.js"></script>
+        <script src="../js/accounts.js"></script>
     </body>
 </html>
