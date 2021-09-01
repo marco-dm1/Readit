@@ -1,44 +1,56 @@
-const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/siteData", {useNewUrlParser: true, useUnifiedTopology: true})
+const mongoDB = require("mongodb").MongoClient
+const security = require("./security.js");
+const query = require("./query.js");
+let liveDatabase;
 
-//Get the default connection
-let db = mongoose.connection;
+mongoDB.connect("mongodb://localhost:27017/websiteData", function(err, db){
+    if(err){console.log("An error occured when connecting to the MongoDB database."); throw err;}
+    liveDatabase = db.db("siteDatabase");
+    console.log("Connected to the MongoDB database server.");
+});
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+function getTime(){
+    let currentTime = new Date();
+    return String(currentTime.getMonth() + 1) + "/" + String(currentTime.getDate()) + "/" + String(currentTime.getFullYear()) + " - " + String(currentTime.getHours()) + ":" + String(currentTime.getMinutes()) + ":" + String(currentTime.getSeconds())
+}
 
+async function checkLogin(username, password){
+    let checkExistingAccounts = await query.checkIfExists(liveDatabase, username, { session: 0, joinDate: 0, name: 0 });
+    if(typeof(checkExistingAccounts) == "object" && checkExistingAccounts[0] != null){
+        let comparePasswords = await security.comparePasswords(password, checkExistingAccounts[0]["password"]);
+        if(comparePasswords == true){
+            let newSessionToken = await security.createSessionToken();
+            await query.updateSessionToken(liveDatabase, username, newSessionToken);
+            return {success: true, token: newSessionToken, id: checkExistingAccounts[0]["_id"]};
+        }else{
+            return {success: false, message: "Your password is incorrect."}
+        }
+    }else{
+        return {success: false, message: "Unable to find the account with that username."}
+    }
+}
 
-const models = require("./models.js");
+async function registerAccount(username, password){
+    let checkExistingAccounts = await query.checkIfExists(liveDatabase, username, { _id: 0, session: 0, joinDate: 0, password: 0 });
+    if(typeof(checkExistingAccounts) == "object" && checkExistingAccounts[0] == null){
+        let hashedPassword = await security.hashPassword(password);
+        if(hashedPassword === false){
+            return false;
+        }
 
-let discoverModelInstance = new models.discoverModel(
-    {topSubs: {
-        one: "test1", 
-        two: "test2",
-        three: "test3",
-        four: "test4",
-        five: "test5",
-        six: "test6"
-    },
-    latestPosts: {
-        name: "testaccount",
-        subReadit: "test",
-        postId: 1,
-        desc: "test description",
-    },
-    newestUser: {
-        name: "testaccount",
-        id: 1,
-    }})
+        let newSessionToken = await security.createSessionToken();
+        let newJoinDate = getTime();
+        let saveQuery = await query.saveAccount(liveDatabase, username, hashedPassword, newSessionToken, newJoinDate);
+        if(saveQuery == true){
+            return {success: true, token: newSessionToken}
+        }else{
+            return false;
+        }
+    }else{
+        return {success: false, message: "An account with that username already exists."}
+    }
+}
 
-discoverModelInstance.save(function (err) {
-    if (err) {console.log(err)};
-    // saved!
-    console.log("saved!");
-  });
-
-/*
-    topSubs: {type: String, required: true},
-    latestPosts: {type: Array, required: true},
-    newestUser: {type: String, required: true}
-*/
+module.exports.checkLogin = checkLogin;
+module.exports.registerAccount = registerAccount;
