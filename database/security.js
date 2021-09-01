@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 let characters = "qwertyuioplkjhgfdsazxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ1234567890";
 
-async function createSessionToken(userId){
-    let sessionToken = "";
+async function createSessionToken(username){
+    let sessionToken = username + "-";
     for(let i = 0; i < 50; i++){
         sessionToken = sessionToken + characters[Math.round(Math.random() * characters.length)];
     }

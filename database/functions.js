@@ -20,7 +20,7 @@ async function checkLogin(username, password){
     if(typeof(checkExistingAccounts) == "object" && checkExistingAccounts[0] != null){
         let comparePasswords = await security.comparePasswords(password, checkExistingAccounts[0]["password"]);
         if(comparePasswords == true){
-            let newSessionToken = await security.createSessionToken();
+            let newSessionToken = await security.createSessionToken(username);
             await query.updateSessionToken(liveDatabase, username, newSessionToken);
             return {success: true, token: newSessionToken, id: checkExistingAccounts[0]["_id"]};
         }else{
@@ -39,7 +39,7 @@ async function registerAccount(username, password){
             return false;
         }
 
-        let newSessionToken = await security.createSessionToken();
+        let newSessionToken = await security.createSessionToken(username);
         let newJoinDate = getTime();
         let saveQuery = await query.saveAccount(liveDatabase, username, hashedPassword, newSessionToken, newJoinDate);
         if(saveQuery == true){
