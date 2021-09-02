@@ -12,7 +12,6 @@ const db = require("../../database/functions.js");
 
 router.get("/getLogin", async function(req, res){
     res.set("Content-Type", "application/json");
-    console.log(`get log in called, user: ${req.headers["username"]} pass: ${req.headers["password"]}`);
     let login = await db.checkLogin(req.headers["username"], req.headers["password"])
     if(login != false){
         res.send(JSON.stringify(login));
@@ -23,7 +22,6 @@ router.get("/getLogin", async function(req, res){
 
 router.get("/postRegister", async function(req, res){
     res.set("Content-Type", "application/json");
-    console.log("post register called");
     let register = await db.registerAccount(req.headers["username"], req.headers["password"])
     if(register != false){
         res.send(JSON.stringify(register));
