@@ -6,7 +6,7 @@ function redirectURLs(){
     let redirects = [["accounts/login", 1], ["accounts/register", 1]]
     for(let i = 0; i < redirects.length; i++){
         if(document.URL.search(redirects[i][0]) != -1){
-            if(sessionToken.search("DO-NOT-SHARE-SECURE") != -1){
+            if(document.cookie.search("DO-NOT-SHARE-SECURE") != -1){
                 console.log("redirecting");
                 let path;
                 switch(redirects[i][1]){
@@ -28,14 +28,14 @@ function redirectURLs(){
 }
 
 function logoutClick(){
-    // Set the session took cookie to expire and reload the page
+    // Set the session token cookie to expire and reload the page
     if(sessionToken != null){
-        document.cookie = "sessionToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = "DO-NOT-SHARE-SECURE=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         location.reload();
     }
 }
 
-function logoutInit(){
+function tokenInit(){
     // Find and set the session token if it exists
     let rawCookie = document.cookie;
     let tokenPosition = rawCookie.search("DO-NOT-SHARE-SECURE=");
@@ -51,6 +51,7 @@ function logoutInit(){
 function init(){
     console.log("Loaded Readit client-side authentication script");
     redirectURLs(); // Redirect us if we are in a logged out area of the website
+    tokenInit();
 }
 
 init();
