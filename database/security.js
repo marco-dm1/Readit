@@ -1,3 +1,5 @@
+// Script that handles bCrypt password hashes and session token creation
+
 const bcrypt = require("bcrypt");
 let characters = "qwertyuioplkjhgfdsazxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ1234567890";
 
@@ -10,13 +12,7 @@ async function createSessionToken(username){
 }
 
 async function hashPassword(password){
-    return bcrypt.hash(password, 5, function(err, hash) {
-        if(err){
-            return false;
-        }else{
-            return hash;
-        }
-    });
+    return await bcrypt.hash(password, 5)
 }
 
 async function comparePasswords(plaintextPassword, hashedPassword){
