@@ -4,7 +4,7 @@ const security = require("./security.js");
 const query = require("./query.js");
 let liveDatabase;
 
-mongoDB.connect("mongodb://localhost:27017/websiteData", function(err, db){
+mongoDB.connect("mongodb://localhost:27017/websiteData", { useUnifiedTopology: true }, function(err, db){
     if(err){console.log("An error occured when connecting to the MongoDB database."); throw err;}
     liveDatabase = db.db("siteDatabase");
     console.log("Connected to the MongoDB database server.");
@@ -16,7 +16,7 @@ function getTime(){
 }
 
 async function checkLogin(username, password){
-    let checkExistingAccounts = await query.checkIfExists(liveDatabase, username, { session: 0, joinDate: 0, name: 0 });
+    let checkExistingAccounts = await query.checkIfExists(liveDatabase, username, { session: 0, joinDate: 0 });
     if(typeof(checkExistingAccounts) == "object" && checkExistingAccounts[0] != null){
         let comparePasswords = await security.comparePasswords(password, checkExistingAccounts[0]["password"]);
         if(comparePasswords == true){
@@ -33,19 +33,15 @@ async function checkLogin(username, password){
 
 async function registerAccount(username, password){
     let checkExistingAccounts = await query.checkIfExists(liveDatabase, username, { _id: 0, session: 0, joinDate: 0, password: 0 });
-    if(typeof(checkExistingAccounts) == "object" && checkExistingAccounts[0] == null){
+    if(checkExistingAccounts == undefined){
         let hashedPassword = await security.hashPassword(password);
         if(hashedPassword === false){
             return false;
-        }
-
-        let newSessionToken = await security.createSessionToken(username);
-        let newJoinDate = getTime();
-        let saveQuery = await query.saveAccount(liveDatabase, username, hashedPassword, newSessionToken, newJoinDate);
-        if(saveQuery == true){
-            return {success: true, token: newSessionToken}
         }else{
-            return false;
+            let newSessionToken = await security.createSessionToken(username);
+            let newJoinDate = getTime();
+            await query.saveAccount(liveDatabase, username, hashedPassword, newSessionToken, newJoinDate);
+            return {success: true, token: newSessionToken}
         }
     }else{
         return {success: false, message: "An account with that username already exists."}
