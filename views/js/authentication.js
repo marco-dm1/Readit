@@ -35,16 +35,28 @@ function logoutClick(){
     }
 }
 
+function loginVisuals(){
+    // Make any logged in only content visible
+    function makeVisible(button){
+        button.style.display = "block";
+    }
+    let logoutButton = document.getElementById("logoutButton");
+    let viewProfileButton = document.getElementById("viewProfileButton");
+    if(logoutButton){
+        makeVisible(logoutButton);
+    }
+    if(viewProfileButton){
+        makeVisible(viewProfileButton);
+    }
+}
+
 function tokenInit(){
     // Find and set the session token if it exists
     let rawCookie = document.cookie;
     let tokenPosition = rawCookie.search("DO-NOT-SHARE-SECURE=");
     if(tokenPosition != -1){
         sessionToken = rawCookie.substring(20);
-        let logoutButton = document.getElementById("logoutButton");
-        if(logoutButton){
-            logoutButton.style.display = "block"; // Makes the logout button visible
-        }
+        loginVisuals();
     }
 }
 
