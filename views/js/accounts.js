@@ -18,6 +18,7 @@ function handleRequest(url, params){
 }
 
 function showNotification(classInput, messageInput){
+    console.log(messageInput);
     let notificationBox = document.getElementById("notificationBox");
     notificationBox.classList.remove("alert-danger");
     notificationBox.classList.remove("alert-success");
@@ -42,7 +43,7 @@ async function login(handleInput, passwordInput){
             let date = new Date();
             date.setDate(date.getDate() + 1);
             //document.cookie = `DO-NOT-SHARE-SECURE=${result["token"]}; expires=${date.toUTCString()}`
-            document.cookie = `DO-NOT-SHARE-SECURE=${result["token"]};`;
+            document.cookie = `DO-NOT-SHARE-SECURE=${result["token"]}; path=/`;
             showNotification("alert-success", "Successfully logged in, redirecting...")
             setTimeout(function(){
                 location.href = "../discover";
@@ -59,9 +60,22 @@ async function login(handleInput, passwordInput){
     }
 }
 
-function register(handleInput, passwordInput, confirmPasswordInput){
+async function register(handleInput, passwordInput, confirmPasswordInput){
     if(passwordInput === confirmPasswordInput){
-        console.log(`Attempting to register with the handle: ${handleInput} & password: ${passwordInput}`);
+        let result = await handleRequest("../api/acc/postRegister", {username:  String(handleInput), password: String(passwordInput)});
+        if(result["success"] == true){
+            document.cookie = `DO-NOT-SHARE-SECURE=${result["token"]}; path=/`;
+            showNotification("alert-success", "Successfully registered account, redirecting...")
+            setTimeout(function(){
+                location.href = "../discover";
+            }, 2000)
+        }else{
+            if(result["message"] != null){
+                showNotification("alert-danger", result["message"]);
+            }else{
+                showNotification("alert-danger", "An error occurred.");
+            }
+        }
     }else{
         showNotification("alert-warning", "Your passwords do not match.");
     }
