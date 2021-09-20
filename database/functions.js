@@ -1,6 +1,7 @@
 
 const mongoDB = require("mongodb").MongoClient
 const security = require("./security.js");
+const discover = require("./discover.js");
 const query = require("./query.js");
 let liveDatabase;
 
@@ -48,5 +49,10 @@ async function registerAccount(username, password){
     }
 }
 
+function getDiscoverData(){
+    return discover.getDiscover();
+}
+
 module.exports.checkLogin = checkLogin;
 module.exports.registerAccount = registerAccount;
+module.exports.getDiscoverData = getDiscoverData;
