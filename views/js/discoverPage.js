@@ -18,7 +18,7 @@ function populatePopularSubs(one, two, three, four, five, six){
 function populateLatestPost(userName, titleText, bodyText, subName, postId){
     document.getElementById("contentCard").style = "display: block;";
     document.getElementById("contentCardTitle").innerHTML = `\"${titleText}\" <i>by ${userName}</i> in /r/${subName}`;
-    document.getElementById("contentCardBody").innerHTML = bodyText + ` <a href=\"./r/${subName}/${postId}\">Read More ></a>`;
+    document.getElementById("contentCardBody").innerHTML = bodyText + ` <a href=\"./r/${subName}/post/${postId}\">Read More ></a>`;
 }
 
 function populateNewestUser(userId, userName){
