@@ -7,8 +7,8 @@ function filterUpdate(filter){
 }
 
 function visualizePosts(postsData){
-    let postContainer = document.getElementsById("postContainer");
-    let contentCardTemplate = document.getElementsById("contentCardTemplate");
+    let postContainer = document.getElementById("postContainer");
+    let contentCardTemplate = document.getElementById("contentCardTemplate");
 
     function createDiv(user, id, title, body){
         let templateClone = contentCardTemplate.cloneNode(true);
@@ -21,12 +21,20 @@ function visualizePosts(postsData){
         templateClone.style.display = "block";
         postContainer.appendChild(templateClone);
     }
+
+    for(let i = 0; i < postsData.length; i++){
+        createDiv(postsData[i].userName, postsData[i].postId, postsData[i].postTitle, postsData[i].postBody)
+    }
 }
 
 async function getSubReaditPosts(){
     // Fetches the subReadit's data from the server and calls another function to visualize it
-    let postsRequest = await fetch(`../api/sub/getSub/${subreadit}`);
-    visualizePosts(postsRequest.json());
+    fetch(`../../api/sub/getSub/${subreadit}`).then(function(fetchedData){
+        // Convert the server's response to readable JSON
+        fetchedData.json().then(function(data){
+            visualizePosts(data);
+        })
+    });
 }
 
 async function findSubReadit(){
@@ -39,9 +47,10 @@ async function findSubReadit(){
     }else{
         subreadit = path.substring(directoryIndex, slashIndex + 3);
     }
+    console.log(`Determined the subReadit is ${subreadit}`);
 }
 
-function init(){
+async function init(){
     await findSubReadit(); // Figure out where the client is on the site before calling dependant functions
     getSubReaditPosts();
 }
