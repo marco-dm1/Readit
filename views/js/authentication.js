@@ -3,26 +3,38 @@
 let sessionToken;
 
 function redirectURLs(){
-    let redirects = [["accounts/login", 1], ["accounts/register", 1]]
+    let redirects = [["accounts/login", 1], ["accounts/register", 1], ["accounts/user/me", "login"]]
     for(let i = 0; i < redirects.length; i++){
         if(document.URL.search(redirects[i][0]) != -1){
-            if(document.cookie.search("DO-NOT-SHARE-SECURE") != -1){
-                console.log("redirecting");
+            if(document.cookie.search("DO-NOT-SHARE-SECURE") == -1){
+                console.log("Redirecting...");
+
+                /*
+                    Demonstration of a switch statement in JS.
+                    A more elegant solution would have the Array's
+                    case element just be the redirect path
+                    to prevent a useless switch statement.
+                */
+
                 let path;
                 switch(redirects[i][1]){
                     case 3:
                         path = "../../../";
                         break;
-                    case 2:
-                        path = "../../";
+                    case "login":
+                        path = "../login";
                         break;
                     default:
                         path = "../";
                         break;
                 }
+                console.log(`path: ${path}`);
+                window.location.replace(path);
                 //window.location.replace(path + "accounts/user/me");
                 // document.cookie = "DO-NOT-SHARE-SECURE=test; expires=Thu, 18 Dec 2013 12:00:00 UTC"
             }
+        }else{
+            console.log(`The string "${redirects[i][0]}" was not found in: ${document.URL}`);
         }
     }
 }
