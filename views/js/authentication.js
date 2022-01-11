@@ -3,10 +3,10 @@
 let sessionToken;
 
 function redirectURLs(){
-    let redirects = [["accounts/login", 1], ["accounts/register", 1], ["accounts/user/me", "login"]]
+    let redirects = [["accounts/login", -1], ["accounts/register", -1], ["accounts/user/me", 0]]
     for(let i = 0; i < redirects.length; i++){
         if(document.URL.search(redirects[i][0]) != -1){
-            if(document.cookie.search("DO-NOT-SHARE-SECURE") == -1){
+            if(document.cookie.search("DO-NOT-SHARE-SECURE") != redirects[i][1]){
                 console.log("Redirecting...");
 
                 /*
@@ -21,8 +21,8 @@ function redirectURLs(){
                     case 3:
                         path = "../../../";
                         break;
-                    case "login":
-                        path = "../login";
+                    case 0:
+                        path = "../../";
                         break;
                     default:
                         path = "../";
@@ -36,6 +36,33 @@ function redirectURLs(){
         }else{
             console.log(`The string "${redirects[i][0]}" was not found in: ${document.URL}`);
         }
+    }
+}
+
+function getSessionUserName(){
+    if(sessionToken != null){
+        return sessionToken.substring(0, sessionToken.indexOf('-'));
+    }else{
+        return "-1";
+    }
+}
+
+function usernameInsertion(){
+    // Adds the user's name if they are logged in.
+    const titleElement = document.getElementById("readitTitle");
+    if(titleElement){
+        let username = getSessionUserName()
+        let usernameElement = document.createElement("i");
+        let textNode;
+        
+        if(username != "-1"){
+            username = `Your username is: ${username}`;
+        }else{
+            username = "";
+        }
+        textNode = document.createTextNode(username);
+        titleElement.appendChild(usernameElement);
+        usernameElement.appendChild(textNode);
     }
 }
 
@@ -69,6 +96,7 @@ function tokenInit(){
     if(tokenPosition != -1){
         sessionToken = rawCookie.substring(20);
         loginVisuals();
+        usernameInsertion();
     }
 }
 
